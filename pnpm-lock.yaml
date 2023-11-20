@@ -25,6 +25,9 @@ dependencies:
     version: 18.2.0(react@18.2.0)
 
 devDependencies:
+  '@hiogawa/vite-import-dev-server':
+    specifier: ^0.0.1
+    version: 0.0.1(vite@5.0.0)
   '@remix-run/dev':
     specifier: ^2.3.0
     version: 2.3.0(@remix-run/serve@2.3.0)(typescript@5.2.2)(vite@5.0.0)
@@ -1107,6 +1110,14 @@ packages:
   /@fastify/busboy@2.1.0:
     resolution: {integrity: sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==}
     engines: {node: '>=14'}
+    dev: true
+
+  /@hiogawa/vite-import-dev-server@0.0.1(vite@5.0.0):
+    resolution: {integrity: sha512-E/OyLULlz+iNideyhbaKwg/n498WdWD7/tIT1VJAj3moVWNXBfoJMpKRc8BwmcQ8fFOWd7/DnLbS2KvxsNxeeg==}
+    peerDependencies:
+      vite: '*'
+    dependencies:
+      vite: 5.0.0
     dev: true
 
   /@humanwhocodes/config-array@0.11.13:
