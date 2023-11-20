@@ -13,6 +13,7 @@ import { viteDevServer } from "@hiogawa/vite-import-dev-server/runtime";
 
 const ABORT_DELAY = 5_000;
 
+// comment out this to see the difference
 export const handleError: HandleErrorFunction = (error) => {
   if (error instanceof Error) {
     viteDevServer?.ssrFixStacktrace(error);
