@@ -18,6 +18,7 @@ export const handleError: HandleErrorFunction = (error) => {
   if (error instanceof Error) {
     viteDevServer?.ssrFixStacktrace(error);
   }
+  console.error(error);
 };
 
 export default function handleRequest(
