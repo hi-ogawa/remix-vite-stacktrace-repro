@@ -13,13 +13,14 @@
     "@remix-run/node": "^2.3.0",
     "@remix-run/react": "^2.3.0",
     "@remix-run/serve": "^2.3.0",
+    "@remix-run/server-runtime": "file:.yalc/@remix-run/server-runtime",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@hiogawa/vite-import-dev-server": "^0.0.1",
-    "@remix-run/dev": "^2.3.0",
+    "@remix-run/dev": "file:.yalc/@remix-run/dev",
     "@remix-run/eslint-config": "^2.3.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
