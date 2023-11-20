@@ -1,25 +1,12 @@
-import { PassThrough } from "node:stream";
+import { PassThrough } from "stream";
 
-import type {
-  AppLoadContext,
-  EntryContext,
-  HandleErrorFunction,
-} from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
+import type { AppLoadContext, EntryContext } from "@remix-run/node";
+import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import { viteDevServer } from "@hiogawa/vite-import-dev-server/runtime";
 
 const ABORT_DELAY = 5_000;
-
-// comment out this to see the difference
-export const handleError: HandleErrorFunction = (error) => {
-  if (error instanceof Error) {
-    viteDevServer?.ssrFixStacktrace(error);
-  }
-  console.error(error);
-};
 
 export default function handleRequest(
   request: Request,
@@ -61,12 +48,11 @@ function handleBotRequest(
         onAllReady() {
           shellRendered = true;
           const body = new PassThrough();
-          const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
 
           resolve(
-            new Response(stream, {
+            new Response(body, {
               headers: responseHeaders,
               status: responseStatusCode,
             })
@@ -111,12 +97,11 @@ function handleBrowserRequest(
         onShellReady() {
           shellRendered = true;
           const body = new PassThrough();
-          const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
 
           resolve(
-            new Response(stream, {
+            new Response(body, {
               headers: responseHeaders,
               status: responseStatusCode,
             })
