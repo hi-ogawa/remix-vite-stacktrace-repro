@@ -1,4 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import { Link, useLocation } from "@remix-run/react";
+import { crash } from "~/utils";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,34 +9,34 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader: LoaderFunction = ({ request }) => {
+  if (request.url.includes("crash-loader")) {
+    crash("crash-loader");
+  }
+  return null;
+};
+
 export default function Index() {
+  const location = useLocation();
+
+  if (import.meta.env.SSR && location.search.includes("crash-server-render")) {
+    crash("crash-server-render");
+  }
+  if (!import.meta.env.SSR && location.search.includes("crash-client-render")) {
+    crash("crash-client-render");
+  }
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix</h1>
       <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
+        {["crash-loader", "crash-server-render", "crash-client-render"].map(
+          (v) => (
+            <li key={v}>
+              <Link to={"/?" + v}>{v}</Link>
+            </li>
+          )
+        )}
       </ul>
     </div>
   );
